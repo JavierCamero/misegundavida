@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Persona Especial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@1,600&display=swap');
+
+        body {
+            background: radial-gradient(circle, #1a0b0b 0%, #050000 100%);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;im
+            animation: moveUp 4s linear forwards;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.8; transform: translateY(90vh) scale(1); }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        .glass-card {
+            background: rgba(40, 10, 15, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-frame {
+            position: relative;
+            padding: 8px;
+            background: linear-gradient(45deg, #e11d48, #fb7185, #f43f5e);
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(225, 29, 72, 0.4);
+        }
+
+        .photo-frame img {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Ajustado para que la foto familiar luzca mejor */
+            object-fit: cover;
+            display: block;
+        }
+
+        .glow-button {
+            box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glow-button:hover {
+            box-shadow: 0 0 40px rgba(225, 29, 72, 0.7);
+            transform: scale(1.05);
+        }
+
+        .message-container {
+            min-height: 100px;
+        }
+
+        .typewriter-text {
+            border-right: 2px solid #e11d48;
+            display: inline;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <div id="hearts-container"></div>
+
+    <div class="z-10 w-full max-w-lg text-center">
+        <div id="main-content" class="glass-card p-6 md:p-8 transition-all duration-1000">
+            
+            <h1 class="title-font text-3xl md:text-4xl text-rose-500 mb-6 italic">Nuestra historia...</h1>
+            
+            <div id="initial-state">
+                <!-- Marco con la foto cargada -->
+                <div class="photo-frame mb-6 mx-auto w-full max-w-xs">
+                    <!-- Aquí es donde se coloca la imagen -->
+                    <img src="https://files.oaiusercontent.com/file-K1XN3kYf1L8hBvN3vF2M3W?se=2026-02-11T20%3A36%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3DWhatsApp%2520Image%25202026-02-11%2520at%252020.04.05.jpeg&sig=Y4I%2Bv9M7VfIu1e8wK7zN%2Bj0S2A%2BXq9Gv5n6h4E8u2L4%3D" alt="Nuestra hermosa familia">
+                </div>
+                
+                <p class="text-gray-300 mb-6 text-base font-light italic">"Construyendo recuerdos juntos, paso a paso."</p>
+                
+                <button onclick="revealLove()" class="glow-button bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 px-8 rounded-full text-md uppercase tracking-widest">
+                    Ver mi mensaje
+                </button>
+            </div>
+
+            <div id="love-state" class="hidden">
+                <div class="mb-4 flex justify-center">
+                    <svg class="w-12 h-12 text-rose-500 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                
+                <h2 class="text-xl font-semibold mb-4 text-white uppercase tracking-wider">Para mi Amor</h2>
+                
+                <div class="message-container text-rose-400 text-lg italic mb-6">
+                    <span id="typewriter" class="typewriter-text"></span>
+                </div>
+
+                <div class="text-gray-400 font-light leading-relaxed text-sm border-t border-rose-900/50 pt-4">
+                    Eres mi hogar y mi mayor alegría. Gracias por cada sonrisa, por nuestra familia y por hacer que la vida sea tan hermosa a tu lado.
+                    <br><br>
+                    <span class="text-rose-500 font-bold tracking-widest uppercase">Te amo con todo mi corazón</span>
+                </div>
+
+                <button onclick="reset()" class="mt-6 text-[10px] text-gray-500 hover:text-rose-400 underline tracking-[0.2em] uppercase transition-colors">Volver</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const message = "Eres lo mejor que me ha pasado en la vida.";
+        let i = 0;
+        let isTyping = false;
+
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            if (!container) return;
+            
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            
+            const size = Math.random() * 20 + 10 + 'px';
+            const left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 3 + 2 + 's';
+            
+            heart.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="#e11d48" style="opacity: ${Math.random() * 0.4 + 0.2}"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+            
+            heart.style.left = left;
+            heart.style.animationDuration = duration;
+            
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        setInterval(createHeart, 500);
+
+        function typeWriter() {
+            if (i < message.length) {
+                document.getElementById("typewriter").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, 70);
+            }
+        }
+
+        function revealLove() {
+            document.getElementById('initial-state').classList.add('opacity-0');
+            setTimeout(() => {
+                document.getElementById('initial-state').classList.add('hidden');
+                document.getElementById('love-state').classList.remove('hidden');
+                if(!isTyping) {
+                    typeWriter();
+                    isTyping = true;
+                }
+                for(let j = 0; j < 40; j++) {
+                    setTimeout(createHeart, j * 40);
+                }
+            }, 500);
+        }
+
+        function reset() {
+            i = 0;
+            isTyping = false;
+            document.getElementById("typewriter").innerHTML = "";
+            document.getElementById('love-state').classList.add('hidden');
+            document.getElementById('initial-state').classList.remove('hidden', 'opacity-0');
+        }
+    </script>
+</body>
+</html>
