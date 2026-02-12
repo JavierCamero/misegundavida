@@ -3,183 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Mi Persona Especial</title>
+    <title>Para alguien especial</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@1,600&display=swap');
-
         body {
-            background: radial-gradient(circle, #1a0b0b 0%, #050000 100%);
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
-            height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            background: #fafafa;
+            overflow-x: hidden;
+            color: #4b5563;
         }
-
-        .title-font {
-            font-family: 'Playfair Display', serif;
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
         }
-
-        .heart-particle {
-            position: absolute;
-            pointer-events: none;im
-            animation: moveUp 4s linear forwards;
-        }
-
-        @keyframes moveUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.8; transform: translateY(90vh) scale(1); }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-
-        .glass-card {
-            background: rgba(40, 10, 15, 0.4);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .photo-frame {
+        
+        /* Reloj de Arena Minimalista */
+        .hourglass-container {
+            width: 60px;
+            height: 90px;
             position: relative;
-            padding: 8px;
-            background: linear-gradient(45deg, #e11d48, #fb7185, #f43f5e);
-            border-radius: 18px;
-            box-shadow: 0 10px 40px rgba(225, 29, 72, 0.4);
+            margin: 30px auto;
         }
-
-        .photo-frame img {
-            border-radius: 12px;
+        .hourglass-svg {
             width: 100%;
-            height: auto;
-            max-height: 400px; /* Ajustado para que la foto familiar luzca mejor */
-            object-fit: cover;
-            display: block;
+            height: 100%;
+            fill: none;
+            stroke: #8b5cf6; /* Violeta suave */
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+        .magic-fill {
+            fill: #ddd6fe;
+            animation: flow 10s ease-in-out infinite;
+        }
+        @keyframes flow {
+            0%, 100% { clip-path: inset(100% 0 0 0); }
+            50% { clip-path: inset(0% 0 0 0); }
         }
 
-        .glow-button {
-            box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Contador Limpio */
+        .counter-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding: 2rem 1rem;
         }
 
-        .glow-button:hover {
-            box-shadow: 0 0 40px rgba(225, 29, 72, 0.7);
-            transform: scale(1.05);
+        .photo-card {
+            background: white;
+            padding: 6px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
         }
 
-        .message-container {
-            min-height: 100px;
+        #noBtn {
+            position: absolute;
+            transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .typewriter-text {
-            border-right: 2px solid #e11d48;
-            display: inline;
+        
+        .pulse-dot {
+            height: 6px;
+            width: 6px;
+            background-color: #a78bfa;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 3px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.5; }
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center p-6">
 
-    <div id="hearts-container"></div>
+    <header class="w-full max-w-lg text-center mt-10 mb-6">
+        <h1 class="text-2xl font-cursive text-violet-600 mb-1">
+            Dicen que el tiempo no se detiene...
+        </h1>
+        <p class="text-gray-400 text-[9px] tracking-[0.4em] uppercase font-bold">Pero contigo hace trampas</p>
+    </header>
 
-    <div class="z-10 w-full max-w-lg text-center">
-        <div id="main-content" class="glass-card p-6 md:p-8 transition-all duration-1000">
-            
-            <h1 class="title-font text-3xl md:text-4xl text-rose-500 mb-6 italic">Nuestra historia...</h1>
-            
-            <div id="initial-state">
-                <!-- Marco con la foto cargada -->
-                <div class="photo-frame mb-6 mx-auto w-full max-w-xs">
-                    <!-- Aquí es donde se coloca la imagen -->
-                    <img src="https://files.oaiusercontent.com/file-K1XN3kYf1L8hBvN3vF2M3W?se=2026-02-11T20%3A36%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3DWhatsApp%2520Image%25202026-02-11%2520at%252020.04.05.jpeg&sig=Y4I%2Bv9M7VfIu1e8wK7zN%2Bj0S2A%2BXq9Gv5n6h4E8u2L4%3D" alt="Nuestra hermosa familia">
-                </div>
-                
-                <p class="text-gray-300 mb-6 text-base font-light italic">"Construyendo recuerdos juntos, paso a paso."</p>
-                
-                <button onclick="revealLove()" class="glow-button bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 px-8 rounded-full text-md uppercase tracking-widest">
-                    Ver mi mensaje
-                </button>
+    <!-- Reloj de Arena -->
+    <div class="hourglass-container">
+        <svg class="hourglass-svg" viewBox="0 0 100 150">
+            <path d="M25,10 L75,10 L75,25 C75,55 50,70 50,75 C50,80 75,95 75,125 L75,140 L25,140 L25,125 C25,95 50,80 50,75 C50,70 25,55 25,25 Z" stroke="#8b5cf6" fill="white" />
+            <path class="magic-fill" d="M25,130 C25,100 50,80 50,75 C50,70 25,55 25,25 L75,25 C75,55 50,70 50,75 C50,80 75,95 75,130 L25,130" fill="#ddd6fe" />
+        </svg>
+    </div>
+
+    <!-- Contador Minimalista -->
+    <div class="w-full max-w-xs counter-box mb-12">
+        <div class="flex justify-between items-center px-4">
+            <div class="flex flex-col items-center">
+                <span id="days" class="text-3xl font-bold text-gray-700">00</span>
+                <span class="text-[8px] text-gray-400 uppercase">Días</span>
             </div>
-
-            <div id="love-state" class="hidden">
-                <div class="mb-4 flex justify-center">
-                    <svg class="w-12 h-12 text-rose-500 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                
-                <h2 class="text-xl font-semibold mb-4 text-white uppercase tracking-wider">Para mi Amor</h2>
-                
-                <div class="message-container text-rose-400 text-lg italic mb-6">
-                    <span id="typewriter" class="typewriter-text"></span>
-                </div>
-
-                <div class="text-gray-400 font-light leading-relaxed text-sm border-t border-rose-900/50 pt-4">
-                    Eres mi hogar y mi mayor alegría. Gracias por cada sonrisa, por nuestra familia y por hacer que la vida sea tan hermosa a tu lado.
-                    <br><br>
-                    <span class="text-rose-500 font-bold tracking-widest uppercase">Te amo con todo mi corazón</span>
-                </div>
-
-                <button onclick="reset()" class="mt-6 text-[10px] text-gray-500 hover:text-rose-400 underline tracking-[0.2em] uppercase transition-colors">Volver</button>
+            <div class="text-violet-200 text-xl font-light mb-4">:</div>
+            <div class="flex flex-col items-center">
+                <span id="hours" class="text-3xl font-bold text-gray-700">00</span>
+                <span class="text-[8px] text-gray-400 uppercase">Hrs</span>
+            </div>
+            <div class="text-violet-200 text-xl font-light mb-4">:</div>
+            <div class="flex flex-col items-center">
+                <span id="minutes" class="text-3xl font-bold text-gray-700">00</span>
+                <span class="text-[8px] text-gray-400 uppercase">Min</span>
+            </div>
+            <div class="text-violet-200 text-xl font-light mb-4">:</div>
+            <div class="flex flex-col items-center">
+                <span id="seconds" class="text-3xl font-bold text-gray-700">00</span>
+                <span class="text-[8px] text-gray-400 uppercase">Seg</span>
             </div>
         </div>
     </div>
 
+    <!-- Fotos Estilo Polaroids -->
+    <div class="flex -space-x-4 mb-14">
+        <div class="photo-card rotate-[-6deg]">
+            <img 1.png " class="w-24 h-24 object-cover rounded">
+        </div>
+        <div class="photo-card rotate-[4deg] z-10">
+            <img src="1.png" alt=""> class="w-20 h-20 object-cover rounded">
+        </div>
+        <div class="photo-card rotate-[-2deg]">
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=200&auto=format&fit=crop" alt="[Risas compartidas]" class="w-24 h-24 object-cover rounded">
+        </div>
+    </div>
+
+    <!-- El Mensaje Estratégico -->
+    <div class="w-full max-w-sm px-6 text-center mb-16">
+        <p class="text-gray-500 text-sm leading-relaxed">
+            No sabía si enviarte esto, pero me pareció curioso cuánto tiempo ha pasado desde que empezamos a hablar. <br><br>
+            A veces me pregunto si tú también notas que el reloj se acelera cuando estamos cerca, o si solo son cosas mías. <br><br>
+            <span class="text-violet-500 font-semibold italic text-xs">Igual, me gusta que seamos este misterio sin resolver...</span>
+        </p>
+        <div class="mt-4">
+            <span class="pulse-dot"></span><span class="pulse-dot"></span><span class="pulse-dot"></span>
+        </div>
+    </div>
+
+    <!-- Pregunta Jugadora -->
+    <div class="relative h-40 w-full flex flex-col items-center">
+        <p class="text-gray-600 font-medium mb-6">¿Tú qué crees? ¿Seguimos perdiendo el tiempo juntos?</p>
+        <div class="flex space-x-6">
+            <button onclick="accepted()" class="bg-violet-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-violet-100 active:scale-95 transition-all">
+                Obvio
+            </button>
+            <button id="noBtn" onmouseover="moveButton()" class="bg-white text-gray-300 px-6 py-3 rounded-xl font-medium border border-gray-100">
+                Mejor no
+            </button>
+        </div>
+    </div>
+
+    <footer class="mt-16 pb-6 text-[8px] text-gray-300 uppercase tracking-widest text-center">
+        Un detalle porque sí
+    </footer>
+
     <script>
-        const message = "Eres lo mejor que me ha pasado en la vida.";
-        let i = 0;
-        let isTyping = false;
+        // Pon aquí la fecha exacta
+        const startDate = new Date('2024-11-15T20:00:00'); 
 
-        function createHeart() {
-            const container = document.getElementById('hearts-container');
-            if (!container) return;
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
             
-            const heart = document.createElement('div');
-            heart.classList.add('heart-particle');
-            
-            const size = Math.random() * 20 + 10 + 'px';
-            const left = Math.random() * 100 + 'vw';
-            const duration = Math.random() * 3 + 2 + 's';
-            
-            heart.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="#e11d48" style="opacity: ${Math.random() * 0.4 + 0.2}"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
-            
-            heart.style.left = left;
-            heart.style.animationDuration = duration;
-            
-            container.appendChild(heart);
-            setTimeout(() => heart.remove(), 4000);
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0'+s : s;
+        }
+        setInterval(updateCounter, 1000);
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 60);
+            btn.style.left = Math.max(10, x) + 'px';
+            btn.style.top = Math.max(10, y) + 'px';
         }
 
-        setInterval(createHeart, 500);
-
-        function typeWriter() {
-            if (i < message.length) {
-                document.getElementById("typewriter").innerHTML += message.charAt(i);
-                i++;
-                setTimeout(typeWriter, 70);
-            }
-        }
-
-        function revealLove() {
-            document.getElementById('initial-state').classList.add('opacity-0');
-            setTimeout(() => {
-                document.getElementById('initial-state').classList.add('hidden');
-                document.getElementById('love-state').classList.remove('hidden');
-                if(!isTyping) {
-                    typeWriter();
-                    isTyping = true;
-                }
-                for(let j = 0; j < 40; j++) {
-                    setTimeout(createHeart, j * 40);
-                }
-            }, 500);
-        }
-
-        function reset() {
-            i = 0;
-            isTyping = false;
-            document.getElementById("typewriter").innerHTML = "";
-            document.getElementById('love-state').classList.add('hidden');
-            document.getElementById('initial-state').classList.remove('hidden', 'opacity-0');
+        function accepted() {
+            const container = document.querySelector('.relative.h-40');
+            container.innerHTML = `
+                <div class="text-center animate-in fade-in zoom-in duration-500">
+                    <p class="text-violet-600 font-cursive text-3xl">Sabía que dirías eso...</p>
+                    <p class="text-gray-400 text-xs mt-2 italic">Entonces no dejes que el reloj se detenga.</p>
+                </div>
+            `;
         }
     </script>
 </body>
